@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Broadcaster</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Music Broadcaster</h1>
+      <div class="stream-info">
+        <p id="status">Status: <span id="live-status">Offline</span></p>
+        <p id="song-info">Current Song: <span id="current-song">None</span></p>
+        <p id="listeners-info">
+          Listeners: <span id="listeners-count">0</span>
+        </p>
+      </div>
+      <div class="audio-player">
+        <audio id="audio-player" controls disabled>
+          <source src="http://localhost:8000/stream" type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+        <p id="player-message" class="offline-message">
+          The stream is offline. Please wait for the broadcaster to go live.
+        </p>
+      </div>
+    </div>
+    <script src="/static/js/script.js"></script>
+  </body>
+</html>
