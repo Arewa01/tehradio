@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Broadcaster Dashboard</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css" />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div class="header">
+        <h1>Broadcaster Dashboard</h1>
+        <button id="logout-btn" class="btn">Logout</button>
+      </div>
+
+      <div class="settings">
+        <h2>Stream Settings</h2>
+        <div class="setting-group">
+          <label for="stream-title">Stream Title:</label>
+          <input
+            type="text"
+            id="stream-title"
+            placeholder="Enter stream title"
+          />
+        </div>
+        <div class="setting-group">
+          <label for="stream-description">Description:</label>
+          <textarea
+            id="stream-description"
+            placeholder="Enter stream description"
+          ></textarea>
+        </div>
+        <button id="save-settings-btn" class="btn btn-save">
+          Save Settings
+        </button>
+        <div class="stream-info">
+          <h3>Current Stream Info</h3>
+          <p>Title: <span id="current-title">None</span></p>
+          <p>Description: <span id="current-description">None</span></p>
+        </div>
+      </div>
+
+      <div class="stream-controls">
+        <h2>Stream Status</h2>
+        <div class="stream-status">
+          <p id="stream-message">Waiting for stream...</p>
+          <p>Status: <span id="stream-status">Offline</span></p>
+          <p>Now playing: <span id="current-song">None</span></p>
+          <p>Listeners: <span id="listeners-count">0</span></p>
+        </div>
+        <div class="butt-prompt">
+          <h3>How to Start the Stream</h3>
+          <ol>
+            <li>Open BUTT (Broadcast Using This Tool).</li>
+            <li>Configure BUTT to connect to your Icecast server:</li>
+            <ul>
+              <li>Server Address: <code>localhost</code></li>
+              <li>Port: <code>8000</code></li>
+              <li>Password: <code>your-source-password</code></li>
+              <li>Mount Point: <code>/stream</code></li>
+            </ul>
+            <li>
+              Click the <strong>Start</strong> button in BUTT to begin
+              streaming.
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <script src="/static/js/dashboard.js"></script>
+  </body>
+</html>
