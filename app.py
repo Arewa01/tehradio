@@ -11,7 +11,8 @@ app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY')  # Load secret key from .env
 
 # Icecast server configuration
-ICECAST_SERVER = os.getenv('ICECAST_SERVER', 'http://localhost:8000/stream')
+ICECAST_SERVER = os.getenv('ICECAST_BASE_URL', 'http://localhost:8000')
+ICECAST_STREAM_URL = f"{ICECAST_SERVER}/stream"
 
 # Mock user credentials (replace with a proper authentication system)
 USERS = {
@@ -27,14 +28,14 @@ STREAM_SETTINGS = {
 @app.route("/")
 def index():
     """Render the main page."""
-    return render_template("index.html", icecast_server=ICECAST_SERVER)
+    return render_template("index.html", icecast_server=ICECAST_STREAM_URL)
 
 @app.route("/dashboard")
 def dashboard():
     """Render the dashboard page."""
     if 'username' not in session:
         return redirect(url_for('login'))
-    return render_template("dashboard.html", icecast_server=ICECAST_SERVER)
+    return render_template("dashboard.html", icecast_server=ICECAST_STREAM_URL)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -76,7 +77,7 @@ def get_metadata():
     """Fetch metadata from the Icecast server and include saved settings."""
     try:
         # Fetch the status JSON from Icecast
-        response = requests.get(f"{ICECAST_SERVER}/status-json.xsl")
+        response = requests.get(f"{ICECAST_BASE_URL}/status-json.xsl")
         data = response.json()
 
         # Extract relevant metadata
@@ -113,8 +114,3 @@ def save_settings():
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5001)
-
-
-
-
-
