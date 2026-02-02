@@ -11,8 +11,7 @@ app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY')  # Load secret key from .env
 
 # Icecast server configuration
-ICECAST_SERVER = os.getenv('ICECAST_SERVER')
-ICECAST_SOURCE_PASSWORD = os.getenv('ICECAST_SOURCE_PASSWORD')
+ICECAST_SERVER = os.getenv('ICECAST_SERVER', 'http://localhost:8000/stream')
 
 # Mock user credentials (replace with a proper authentication system)
 USERS = {
@@ -28,14 +27,14 @@ STREAM_SETTINGS = {
 @app.route("/")
 def index():
     """Render the main page."""
-    return render_template("index.html")
+    return render_template("index.html", icecast_server=ICECAST_SERVER)
 
 @app.route("/dashboard")
 def dashboard():
     """Render the dashboard page."""
     if 'username' not in session:
         return redirect(url_for('login'))
-    return render_template("dashboard.html")
+    return render_template("dashboard.html", icecast_server=ICECAST_SERVER)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

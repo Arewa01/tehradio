@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const playerMessage = document.getElementById('player-message');
 
      // Set the stream URL from environment variable
-    const streamUrl = process.env.ICECAST_SERVER || 'http://localhost:8000/stream';
+// Get the ICECAST_SERVER value from the global variable set by Flask
+    const streamUrl = window.icecastServer || 'http://localhost:8000/stream';
+
     if (audioSource) {
         audioSource.src = streamUrl;
         audioPlayer.load(); // Reload the audio element with new source
