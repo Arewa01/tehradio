@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY')  # Load secret key from .env
 
 # Icecast server configuration
-ICECAST_SERVER = os.getenv('ICECAST_BASE_URL', 'http://localhost:8000')
+ICECAST_SERVER = os.getenv('ICECAST_SERVER', 'http://localhost:8000')
 ICECAST_STREAM_URL = f"{ICECAST_SERVER}/stream"
 
 # Mock user credentials (replace with a proper authentication system)
@@ -77,7 +77,7 @@ def get_metadata():
     """Fetch metadata from the Icecast server and include saved settings."""
     try:
         # Fetch the status JSON from Icecast
-        response = requests.get(f"{ICECAST_BASE_URL}/status-json.xsl")
+        response = requests.get(f"{ICECAST_SERVER}/status-json.xsl")
         data = response.json()
 
         # Extract relevant metadata
