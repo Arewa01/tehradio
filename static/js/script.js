@@ -1,9 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
     const liveStatusElement = document.getElementById('live-status');
     const currentSongElement = document.getElementById('current-song');
+    const audioSource = document.getElementById('audio-source');
     const listenersCountElement = document.getElementById('listeners-count');
     const audioPlayer = document.getElementById('audio-player');
     const playerMessage = document.getElementById('player-message');
+
+     // Set the stream URL from environment variable
+    const streamUrl = process.env.ICECAST_SERVER || 'http://localhost:8000/stream';
+    if (audioSource) {
+        audioSource.src = streamUrl;
+        audioPlayer.load(); // Reload the audio element with new source
+    }
 
     // Function to fetch metadata from the Flask backend
     function fetchMetadata() {
